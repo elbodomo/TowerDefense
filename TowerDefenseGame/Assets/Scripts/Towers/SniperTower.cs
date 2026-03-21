@@ -15,5 +15,7 @@ public class SniperTower : TowerBase
         }
         nearestTarget.GetComponent<Enemy>().TakeDamage(damage);
         Debug.Log("Sniper Attack");
+
+        // add sniper anim
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TowerBuilder : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class TowerBuilder : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    return;
+                }
                 PlaceTower(hitPos);
             }
         }
