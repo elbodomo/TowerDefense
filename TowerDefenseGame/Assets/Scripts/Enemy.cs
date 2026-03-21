@@ -47,6 +47,16 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    public void takeDamage(int amount)
+    {
+        currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            Deactivate();
+            // todo kill behaviour
+        }
+    }
+
     private void Deactivate()
     {
 
