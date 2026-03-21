@@ -1,11 +1,15 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public abstract class TowerBase : MonoBehaviour
 {
-    [SerializeField] protected float range = 5f;
+    
     [SerializeField] protected float fireRate = 1f;
     [SerializeField] protected int damage = 10;
     [SerializeField] protected LayerMask enemyLayer;
+
+    [SerializeField] public float range { get; protected set; } = 5f;
+    [SerializeField] public int cost { get; protected set; } = 50;
 
     protected float fireTimer;
 

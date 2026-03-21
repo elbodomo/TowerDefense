@@ -13,7 +13,7 @@ public class SniperTower : TowerBase
                 nearestTarget = col;
             }
         }
-        nearestTarget.GetComponent<Enemy>().takeDamage(damage);
+        nearestTarget.GetComponent<Enemy>().TakeDamage(damage);
         Debug.Log("Sniper Attack");
     }
 }

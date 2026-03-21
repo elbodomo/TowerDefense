@@ -44,15 +44,17 @@ public class Enemy : MonoBehaviour
             {
                 //base reached
                 Deactivate();
+                GameManager.Instance.RemoveHealth(damageToBase);
             }
         }
     }
-    public void takeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
             Deactivate();
+            GameManager.Instance.AddMoney(moneyReward);
             // todo kill behaviour
         }
     }

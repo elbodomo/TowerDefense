@@ -6,7 +6,7 @@ public class AoeTower : TowerBase
     {
         foreach(Collider col in colliders)
         {
-            col.GetComponent<Enemy>().takeDamage(damage);
+            col.GetComponent<Enemy>().TakeDamage(damage);
 
             Debug.Log("Aoe Attack");
         }
