@@ -46,11 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d2534e2538e2a4f90790b71632c3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 1
-  damage: 10
+  fireRate: 2
+  damage: 15
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
+  range: 3
+  cost: 50
 --- !u!135 &7498312449808907424
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -137,7 +139,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4e9f63e4801604141b1b8966a1927cc5, type: 2}
+  - {fileID: 2100000, guid: 2e47023b1bcc50e45b6eb787b008ef66, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

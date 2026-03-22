@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Color selectedColor = Color.green;
 
     private Image curSelectedButtonImage;
-
+    [SerializeField] private TMP_Text WaveCounter;
     private void Awake()
     {
         //Singleton Implementation
@@ -46,5 +47,10 @@ public class UIManager : MonoBehaviour
             curSelectedButtonImage.color = normalColor;
             curSelectedButtonImage = null;
         }
+    }
+
+    public void UpdateWaveCounter(int CurrentWave, int TotalWaves)
+    {
+        WaveCounter.text =(CurrentWave.ToString() + " / "  +TotalWaves.ToString());
     }
 }

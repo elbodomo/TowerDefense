@@ -8,8 +8,8 @@ public abstract class TowerBase : MonoBehaviour
     [SerializeField] protected int damage = 10;
     [SerializeField] protected LayerMask enemyLayer;
 
-    [SerializeField] public float range { get; protected set; } = 5f;
-    [SerializeField] public int cost { get; protected set; } = 50;
+    [SerializeField] public float range = 5f;
+    [SerializeField] public int cost = 50;
 
     protected float fireTimer;
 

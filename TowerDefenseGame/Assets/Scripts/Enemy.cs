@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
 
         transform.position = EnemyPoolManager.Instance.transform.position;
 
-        EnemyPoolManager.Instance.despawnEnemy(this);
+        EnemyPoolManager.Instance.DespawnEnemy(this);
 
         gameObject.SetActive(false);
 
