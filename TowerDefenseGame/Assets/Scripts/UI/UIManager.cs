@@ -13,6 +13,18 @@ public class UIManager : MonoBehaviour
 
     private Image curSelectedButtonImage;
     [SerializeField] private TMP_Text WaveCounter;
+
+    private bool isGameStartedUI = false;
+    [SerializeField] private TMP_Text startStopButtonText;
+
+
+    [SerializeField] private TMP_Text MoneyUIText;
+    [SerializeField] private TMP_Text HealthUIText;
+
+    [SerializeField] private TMP_Text speedMultiplierButtonText;
+    private int[] speedMultipliers = { 1, 2, 4 };
+    private int currentMultiplierIndex = 0;
+
     private void Awake()
     {
         //Singleton Implementation
@@ -22,6 +34,33 @@ public class UIManager : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+    public void ToggleStartStop()
+    {
+        isGameStartedUI = !isGameStartedUI;
+
+        if (isGameStartedUI)
+        {
+            startStopButtonText.text = "Stop";
+            GameManager.Instance.StartGame();
+        }
+        else
+        {
+            startStopButtonText.text = "Start";
+            GameManager.Instance.StopGame();
+        }
+    }
+    public void ToggleSpeedMultiplier()
+    {
+        currentMultiplierIndex = (currentMultiplierIndex + 1) % speedMultipliers.Length;
+        int newMultiplier = speedMultipliers[currentMultiplierIndex];
+
+        if (speedMultiplierButtonText != null)
+        {
+            speedMultiplierButtonText.text = "x" + newMultiplier.ToString();
+        }
+
+        GameManager.Instance.SetSpeedMultiplier(newMultiplier);
     }
     public void OnTowerButtonClicked(GameObject towerPrefab, Image clickedButtonImage)
     {
@@ -38,6 +77,28 @@ public class UIManager : MonoBehaviour
 
         towerBuilder.SelectTowerToBuild(towerPrefab);
 
+    }
+    public void SetWaveCompleteUI()
+    {
+        isGameStartedUI = false;
+        if (startStopButtonText != null)
+        {
+            startStopButtonText.text = "Start";
+        }
+    }
+    public void SetMoneyUI(int amount)
+    {
+        if (MoneyUIText != null)
+        {
+            MoneyUIText.text = amount.ToString();
+        }
+    }
+    public void SetHealthUI(int amount)
+    {
+        if (HealthUIText != null)
+        {
+            HealthUIText.text = amount.ToString();
+        }
     }
 
     public void ResetButtonColors()

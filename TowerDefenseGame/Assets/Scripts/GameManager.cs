@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,7 +7,9 @@ public class GameManager : MonoBehaviour
 
 
     //Game Variables
-    public int GameSpeed = 1;
+    public int SpeedMultiplier = 1;
+    public int GameSpeed = 1; 
+    private bool isGameRunning = false;
 
     [SerializeField] private int health = 20;
     [SerializeField] private int money = 100;
@@ -27,7 +30,9 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        UIManager.Instance.SetMoneyUI(money);
+
+        UIManager.Instance.SetHealthUI(health);
     }
 
     // Update is called once per frame
@@ -36,14 +41,42 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void StartGame()
+    {
+        isGameRunning = true;
+        GameSpeed = 1 * SpeedMultiplier;
+
+        if (WaveManager.Instance != null)
+        {
+            WaveManager.Instance.StartNextwave();
+        }
+    }
+
+    public void StopGame()
+    {
+        isGameRunning = false;
+        GameSpeed = 0;
+    }
+    public void SetSpeedMultiplier(int newMultiplier)
+    {
+        SpeedMultiplier = newMultiplier;
+        if (isGameRunning)
+        {
+            GameSpeed = 1 * SpeedMultiplier;
+        }
+    }
     //helper Functions
     public void AddMoney(int amount)
     {
         money += amount;
+
+        UIManager.Instance.SetMoneyUI(money);
     }
     public void RemoveMoney(int amount)
     {
         money -= amount;
+
+        UIManager.Instance.SetMoneyUI(money);
     }
     public bool CanAfford(int amount)
     {
@@ -52,14 +85,18 @@ public class GameManager : MonoBehaviour
     public void AddHealth(int amount)
     {
         health += amount;
+
+        UIManager.Instance.SetHealthUI(health);
     }
     public void RemoveHealth(int amount)
     {
         health -= amount;
 
+        UIManager.Instance.SetHealthUI(health);
+
         if (health <= 0)
         {
-            //Game over
+            StopGame();
         }
     }
 }

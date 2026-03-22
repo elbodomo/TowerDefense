@@ -36,6 +36,8 @@ public class WaveManager : MonoBehaviour
     private int currentWaveIndex = 0;
     private bool isWaveRunning = false;
 
+    private int activeEnemies = 0;
+    private bool doneSpawning = false;
     private void Awake()
     {
         //Singleton Implementation
@@ -77,6 +79,7 @@ public class WaveManager : MonoBehaviour
     private IEnumerator PlayWaveRoutine(Wave wave)
     {
         isWaveRunning = true;
+        doneSpawning = false;
 
         if (UIManager.Instance != null)
         {
@@ -119,8 +122,35 @@ public class WaveManager : MonoBehaviour
             }
 
         }
-        currentWaveIndex++;
-        isWaveRunning = false;
-        Debug.Log("Wave done");
+
+
+        doneSpawning = false;
+        Debug.Log("All enemys spawned");
+
+    }
+    public void EnemyDefeated()
+    {
+        activeEnemies--;
+        CheckWaveCompleted();
+    }
+
+    private void CheckWaveCompleted()
+    {
+        if (doneSpawning && activeEnemies <= 0)
+        {
+            currentWaveIndex++;
+            isWaveRunning = false;
+            Debug.Log("Wave fully cleared!");
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.StopGame();
+            }
+
+            if (UIManager.Instance != null)
+            {
+                UIManager.Instance.SetWaveCompleteUI();
+            }
+        }
     }
 }

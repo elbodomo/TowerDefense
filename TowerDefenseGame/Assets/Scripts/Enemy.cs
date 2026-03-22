@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour
         {
             Deactivate();
             GameManager.Instance.AddMoney(moneyReward);
+            WaveManager.Instance.EnemyDefeated();
             // todo kill behaviour
         }
     }
