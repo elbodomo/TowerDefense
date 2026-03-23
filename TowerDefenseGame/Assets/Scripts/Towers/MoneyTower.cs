@@ -12,7 +12,7 @@ public class MoneyTower : TowerBase
 
             fireTimer = fireRate;
 
-            //add money Animation
+            attacParticales.Play();
         }
     }
     protected override void Attack(Collider[] colliders)

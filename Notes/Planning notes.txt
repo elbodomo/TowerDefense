@@ -1,0 +1,63 @@
+work times
+thursday ~30 minutes planning/ Unity Version install/ ideation
+Friday start 16:30 end 19:00 work time 2:30 
+Saturday start 15:00 end 18:00 work time 3:00	TowerBase and TowerTypes, Tower placing and Cursor. Ui for Tower selection and ui Manager
+Sunday start 16:00 18:00 wave Manager json load, Basic prefabs, game logic ui for start stop 
+
+1. Core Architecture (Inheritance & Systems)
+Enemy System:
+
+EnemyBase (Abstract): Handles currentHealth, moveSpeed, damageToBase, and OnDeath events.
+
+Scout: High speed, low health.
+
+Tank: Low speed, high health.
+
+Tower System:
+
+TowerBase (Abstract): Handles LayerMask sensing, fireRate cooldowns, and range.
+
+Sniper: Uses Physics.OverlapSphere to find the nearest target; applies damage instantly to one unit.
+
+AOE: Uses Physics.OverlapSphere to apply damage to all units within radius.
+
+Support: Generates currency on a set interval.
+
+Currency & Health:
+
+Currency: Nails (Primary resource for building/upgrading).
+
+Health: Base Wall Integrity (Total HP of the player's base).
+
+2. Technical Implementation
+Object Pooling: Mandatory for Scout and Tank prefabs to optimize WebGL performance.
+
+Combat Feedback: Sniper triggers a MuzzleFlash particle on the tower; Enemies trigger a Damage particle system on their own transform when hit.
+
+Placement: 1x1 unit grid snapping using Mathf.RoundToInt. Raycast validation ensures towers are placed on "Ground" and not "Path" layers.
+
+Navigation: Waypoint-based movement. Vehicles move towards the next index and rotate to face the direction of travel.
+
+3. Game Flow
+Spawn: Enemy Spawner at start of path.
+
+Goal: Player Base at end of path.
+
+UI: * Nail Counter (Currency).
+
+Wall Integrity (Base Health).
+
+Wave Control (Start Button).
+
+Tower Shop (Selection).
+
+4. Optional Polish (Final Stage)
+Theme Integration: Swapping generic models for specific assets (Vehicles, Roadblocks).
+
+VFX: Enhancing particle systems and environment details.
+
+3D Assets: Adding low-poly environmental models.
+
+
+
+

@@ -102,6 +102,8 @@ public class WaveManager : MonoBehaviour
             {
                 for ( int i = 0; i<action.amount; i++)
                 {
+
+                    activeEnemies++;
                     if (action.enemyIndex == 0)
                     {
                         EnemyPoolManager.Instance.SpawnLightEnemy();
@@ -120,12 +122,13 @@ public class WaveManager : MonoBehaviour
                     }
                 }
             }
-
         }
 
 
-        doneSpawning = false;
+        doneSpawning = true;
         Debug.Log("All enemys spawned");
+
+        CheckWaveCompleted();
 
     }
     public void EnemyDefeated()

@@ -10,8 +10,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int damageToBase = 1;
     [SerializeField] private int moneyReward = 5;
 
+    [SerializeField] private ParticleSystem hitParticles;
+
     private float currentHealth;
     private int nextWaypointIndex;
+
+    
 
     private void OnEnable()
     {
@@ -51,17 +55,20 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+
+        hitParticles.Play();
         if (currentHealth <= 0)
         {
             Deactivate();
             GameManager.Instance.AddMoney(moneyReward);
-            WaveManager.Instance.EnemyDefeated();
             // todo kill behaviour
         }
     }
 
     private void Deactivate()
     {
+
+        WaveManager.Instance.EnemyDefeated();
 
         transform.position = EnemyPoolManager.Instance.transform.position;
 

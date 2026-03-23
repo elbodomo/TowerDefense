@@ -10,7 +10,8 @@ public class AoeTower : TowerBase
 
             Debug.Log("Aoe Attack");
 
-            // add aoe anim
+
+            attacParticales.Play();
         }
     }
 }

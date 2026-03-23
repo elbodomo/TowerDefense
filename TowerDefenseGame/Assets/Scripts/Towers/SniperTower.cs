@@ -13,9 +13,11 @@ public class SniperTower : TowerBase
                 nearestTarget = col;
             }
         }
+        gameObject.transform.LookAt(nearestTarget.transform.position);
         nearestTarget.GetComponent<Enemy>().TakeDamage(damage);
         Debug.Log("Sniper Attack");
 
-        // add sniper anim
+
+        attacParticales.Play();
     }
 }

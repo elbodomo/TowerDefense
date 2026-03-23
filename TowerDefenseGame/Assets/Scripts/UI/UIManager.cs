@@ -90,14 +90,14 @@ public class UIManager : MonoBehaviour
     {
         if (MoneyUIText != null)
         {
-            MoneyUIText.text = amount.ToString();
+            MoneyUIText.text = ("$ "+amount.ToString());
         }
     }
     public void SetHealthUI(int amount)
     {
         if (HealthUIText != null)
         {
-            HealthUIText.text = amount.ToString();
+            HealthUIText.text = ("<3 " + amount.ToString());
         }
     }
 
@@ -112,6 +112,6 @@ public class UIManager : MonoBehaviour
 
     public void UpdateWaveCounter(int CurrentWave, int TotalWaves)
     {
-        WaveCounter.text =(CurrentWave.ToString() + " / "  +TotalWaves.ToString());
+        WaveCounter.text =("Wave: "+ CurrentWave.ToString() + " / "  +TotalWaves.ToString());
     }
 }
