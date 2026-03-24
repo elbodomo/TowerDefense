@@ -1,63 +1,32 @@
-work times
-thursday ~30 minutes planning/ Unity Version install/ ideation
-Friday start 16:30 end 19:00 work time 2:30 
-Saturday start 15:00 end 18:00 work time 3:00	TowerBase and TowerTypes, Tower placing and Cursor. Ui for Tower selection and ui Manager
-Sunday start 16:00 18:00 wave Manager json load, Basic prefabs, game logic ui for start stop 
+Project Development Notes: 10-Hour Sprint
+1. Development Sessions
+Thursday (~30 min): Initial planning, Unity version setup (6000.0.58f2), and core architecture ideation.
 
-1. Core Architecture (Inheritance & Systems)
-Enemy System:
+Friday (2:30h): Core project structure, Singleton managers, and basic game flow setup.
 
-EnemyBase (Abstract): Handles currentHealth, moveSpeed, damageToBase, and OnDeath events.
+Saturday (3:00h): Tower logic, tower selection UI, and UIManager implementation.
 
-Scout: High speed, low health.
+Sunday (2:00h): JSON-based Wave Manager, enemy prefab creation, and Start/Stop game state logic.
 
-Tank: Low speed, high health.
+Monday (2:15h): Gameplay balancing, low-poly 3D modeling, particle feedback systems, level design, and WebGL build.
 
-Tower System:
+2. Architecture & Performance
+Enemy System: Built on an abstract EnemyBase to handle health, movement, and death events. Includes "Scout" (speed-focused) and "Heavy" (health-focused) variants.
 
-TowerBase (Abstract): Handles LayerMask sensing, fireRate cooldowns, and range.
+Tower System: Abstract TowerBase manages enemy detection via LayerMasks and fire-rate cooldowns.
 
-Sniper: Uses Physics.OverlapSphere to find the nearest target; applies damage instantly to one unit.
+Tower Types: Features a Sniper (high-precision single-target), AOE (radius-based splash damage), and Support (passive economy generation).
 
-AOE: Uses Physics.OverlapSphere to apply damage to all units within radius.
+Optimization: Implemented Object Pooling for all enemy types to ensure stable and smooth performance for the WebGL target.
 
-Support: Generates currency on a set interval.
+3. Implementation Details
+Visual Feedback: While visual experience wasn't strictly required, I implemented muzzle flashes, impact particles, and material color swaps (Damage Flashes) to provide essential gameplay feedback.
 
-Currency & Health:
+Level and Wave Loading: Utilized JSON files to handle level layouts and wave data. This allowed for rapid iteration and testing by leveraging LLM efficiency with structured data.
 
-Currency: Nails (Primary resource for building/upgrading).
+Navigation: Created a waypoint-based system where enemies calculate the path to the base and rotate to face their direction of travel.
 
-Health: Base Wall Integrity (Total HP of the player's base).
+4. Challenges & Meandering
+Pivoting the wave Builder: I initially attempted to build a manual wave-editing tool for use in the engine, but realized this was consuming too much of the 10-hour budget. I pivoted to the JSON-loading system, which proved much faster to iterate on and easier to scale.
 
-2. Technical Implementation
-Object Pooling: Mandatory for Scout and Tank prefabs to optimize WebGL performance.
-
-Combat Feedback: Sniper triggers a MuzzleFlash particle on the tower; Enemies trigger a Damage particle system on their own transform when hit.
-
-Placement: 1x1 unit grid snapping using Mathf.RoundToInt. Raycast validation ensures towers are placed on "Ground" and not "Path" layers.
-
-Navigation: Waypoint-based movement. Vehicles move towards the next index and rotate to face the direction of travel.
-
-3. Game Flow
-Spawn: Enemy Spawner at start of path.
-
-Goal: Player Base at end of path.
-
-UI: * Nail Counter (Currency).
-
-Wall Integrity (Base Health).
-
-Wave Control (Start Button).
-
-Tower Shop (Selection).
-
-4. Optional Polish (Final Stage)
-Theme Integration: Swapping generic models for specific assets (Vehicles, Roadblocks).
-
-VFX: Enhancing particle systems and environment details.
-
-3D Assets: Adding low-poly environmental models.
-
-
-
-
+Object Pooling Scalability: My current pooling implementation uses separate lists for each enemy type. A more scalable approach for a larger game would be a generic Dictionary-based pool to reduce boilerplate code when adding new unit types.
